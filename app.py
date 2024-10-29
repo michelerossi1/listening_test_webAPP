@@ -15,6 +15,8 @@ app.secret_key = "secret_key"  # Required for session management
 AUDIO_FOLDER = "static/music"
 EVALUATION_FILE = "evaluations.csv"  # The CSV file where evaluations will be stored
 
+def printalo():
+    print('ee')
 
 def get_audio_files():
     """Retrieve all .wav files from the AUDIO_FOLDER directory."""
