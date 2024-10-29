@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Evaluation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <h1 class="mb-4">Song Evaluation</h1>
+
+    {% if not show_player %}
+        <h2>Enter Your Details</h2>
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" class="form-control" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    {% else %}
+        <h2>Welcome, {{ user.name }}!</h2>
+        <p>Age: {{ user.age }}</p>
+        <p>Gender: {{ user.gender }}</p>
+        <h3>Song {{ session.current_song_index + 1 }} of {{ session.audio_files | length }}</h3>
+
+        <h3>Press Play to listen to the song:</h3>
+        <audio controls>
+            <source src="{{ song_path }}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+
+        <h3 class="mt-4">Evaluate the song:</h3>
+        <form method="POST" action="/play">
+            <div class="form-group">
+                <label for="aggressive">Aggressive:</label>
+                <input type="range" id="aggressive" name="aggressive" min="-3" max="3" value="0" required>
+            </div>
+            <div class="form-group">
+                <label for="relaxed">Relaxed:</label>
+                <input type="range" id="relaxed" name="relaxed" min="-3" max="3" value="0" required>
+            </div>
+            <div class="form-group">
+                <label for="happy">Happy:</label>
+                <input type="range" id="happy" name="happy" min="-3" max="3" value="0" required>
+            </div>
+            <div class="form-group">
+                <label for="sad">Sad:</label>
+                <input type="range" id="sad" name="sad" min="-3" max="3" value="0" required>
+            </div>
+            <button type="submit" class="btn btn-success">Next Song</button>
+        </form>
+    {% endif %}
+</body>
+</html>
+
