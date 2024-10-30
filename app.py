@@ -111,6 +111,18 @@ def play_song():
     # Get user data from session
     user = session.get("user", {})
 
+    # Calculate total songs
+    total_songs = len(audio_files)
+    
+    # Check for messages at 1/4, 1/2, and 3/4
+    message = ""
+    if current_song_index == total_songs // 4:
+        message = "You've reached 1/4 of the songs. Take a 5-minute break to rest your ears!"
+    elif current_song_index == total_songs // 2:
+        message = "You've reached half of the songs. Take a 5-minute break to rest your ears!"
+    elif current_song_index == (3 * total_songs) // 4:
+        message = "You've reached 3/4 of the songs. Take a 5-minute break to rest your ears!"
+
     if request.method == "POST":
         # Get slider values from evaluation form
         aggressive = request.form.get("aggressive")
@@ -138,10 +150,12 @@ def play_song():
             session['current_song_index'] = 0
             return "Thank you for evaluating all songs!"
 
-    return render_template("index.html", show_player=True, song_path=current_song_path, user=user)
+    return render_template("index.html", show_player=True, song_path=current_song_path, user=user, message=message)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-
+    #app.run(debug=True)
+    
+    
+    app.run(host="0.0.0.0", port=5000, debug=True)
 

@@ -38,6 +38,11 @@
         <p>Gender: {{ user.gender }}</p>
         <h3>Song {{ session.current_song_index + 1 }} of {{ session.audio_files | length }}</h3>
 
+
+        {% if message %}
+            <div class="alert alert-info mt-4">{{ message }}</div>
+        {% endif %}
+
         <h3>Press Play to listen to the song:</h3>
         <audio controls>
             <source src="{{ song_path }}" type="audio/wav">
@@ -67,4 +72,5 @@
     {% endif %}
 </body>
 </html>
+
 
