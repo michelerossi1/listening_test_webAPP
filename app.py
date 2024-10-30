@@ -8,6 +8,7 @@ Created on Mon Oct 28 14:33:23 2024
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import csv
+import random
 
 app = Flask(__name__)
 app.secret_key = "secret_key"  # Required for session management
@@ -15,12 +16,32 @@ app.secret_key = "secret_key"  # Required for session management
 AUDIO_FOLDER = "static/music"
 EVALUATION_FILE = "evaluations.csv"  # The CSV file where evaluations will be stored
 
-def printalo():
-    print('ee')
+
+AUDIO_FOLDER = "static/music"
+ORIGINAL_FOLDER = os.path.join(AUDIO_FOLDER, "original")
+AUGMENTED_FOLDER = os.path.join(AUDIO_FOLDER, "augmented")
+
 
 def get_audio_files():
-    """Retrieve all .wav files from the AUDIO_FOLDER directory."""
-    return [f for f in os.listdir(AUDIO_FOLDER) if f.endswith(".wav")]
+    """Retrieve and shuffle .wav files from original and augmented folders separately."""
+    
+    # Get all .wav files in the original folder
+    original_files = [os.path.join("original", f) for f in os.listdir(ORIGINAL_FOLDER) if f.endswith(".wav")]
+    
+    # Get all .wav files in each subfolder of the augmented folder
+    augmented_files = []
+    for subfolder in os.listdir(AUGMENTED_FOLDER):
+        subfolder_path = os.path.join(AUGMENTED_FOLDER, subfolder)
+        if os.path.isdir(subfolder_path):  # Only process directories
+            augmented_files += [os.path.join("augmented", subfolder, f) 
+                                for f in os.listdir(subfolder_path) if f.endswith(".wav")]
+    
+    # Shuffle the original and augmented lists separately
+    random.shuffle(original_files)
+    random.shuffle(augmented_files)
+    
+    # Combine the two lists with original files first
+    return original_files + augmented_files
 
 
 def save_evaluation(user_data, song, evaluation):
@@ -48,10 +69,9 @@ def save_evaluation(user_data, song, evaluation):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    # Initialize session variables for the current song index and user info
-    if 'current_song_index' not in session:
-        session['current_song_index'] = 0
-        session['audio_files'] = get_audio_files()
+    # Always refresh the audio files list on each visit to this route
+    session['audio_files'] = get_audio_files()
+    session['current_song_index'] = 0
 
     if request.method == "POST":
         # Get form data
