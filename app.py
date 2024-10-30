@@ -5,6 +5,7 @@ Created on Mon Oct 28 14:33:23 2024
 @author: miche
 """
 
+
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import csv
@@ -14,10 +15,11 @@ app = Flask(__name__)
 app.secret_key = "secret_key"  # Required for session management
 
 AUDIO_FOLDER = "static/music"
-EVALUATION_FILE = "evaluations.csv"  # The CSV file where evaluations will be stored
+USER_EVALUATIONS_FOLDER = "user_evaluations"  # Folder to store individual user evaluation files
 
+# Ensure the user evaluations folder exists
+os.makedirs(USER_EVALUATIONS_FOLDER, exist_ok=True)
 
-AUDIO_FOLDER = "static/music"
 ORIGINAL_FOLDER = os.path.join(AUDIO_FOLDER, "original")
 AUGMENTED_FOLDER = os.path.join(AUDIO_FOLDER, "augmented")
 
@@ -45,16 +47,22 @@ def get_audio_files():
 
 
 def save_evaluation(user_data, song, evaluation):
-    """Save a song evaluation to a CSV file."""
-    file_exists = os.path.isfile(EVALUATION_FILE)
-    with open(EVALUATION_FILE, mode="a", newline="") as csv_file:
+    """Save a song evaluation to a unique CSV file for each user in the user_evaluations folder."""
+    # Create a unique filename for each user based on their name
+    filename = f"{user_data['name']}_{user_data['age']}.csv"
+    csv_path = os.path.join(USER_EVALUATIONS_FOLDER, filename)
+
+    # Check if the file already exists to determine if headers are needed
+    file_exists = os.path.isfile(csv_path)
+
+    with open(csv_path, mode="a", newline="") as csv_file:
         writer = csv.writer(csv_file)
-        
-        # If the file does not exist, write the header row
+
+        # Write header only if the file is new
         if not file_exists:
             writer.writerow(["Name", "Age", "Gender", "Song", "Aggressive", "Relaxed", "Happy", "Sad"])
         
-        # Write the evaluation data
+        # Write evaluation data to the file
         writer.writerow([
             user_data["name"],
             user_data["age"],
