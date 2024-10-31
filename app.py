@@ -24,6 +24,7 @@ ORIGINAL_FOLDER = os.path.join(AUDIO_FOLDER, "original")
 AUGMENTED_FOLDER = os.path.join(AUDIO_FOLDER, "augmented")
 
 
+
 def get_audio_files():
     """Retrieve and shuffle .wav files from original and augmented folders separately."""
     
@@ -154,8 +155,10 @@ def play_song():
 
 
 if __name__ == "__main__":
-    #app.run(debug=True)
+    
+    app.run(debug=True)   
+    
+    #app.run(host="0.0.0.0", port=5000, debug=True)
     
     
-    app.run(host="0.0.0.0", port=5000, debug=True)
 

@@ -1,0 +1,5 @@
+Name,Age,Gender,Song,Aggressive,Relaxed,Happy,Sad
+mike,55,male,original\0__happy2_original.wav,0,0,3,0
+mike,55,male,original\0__aggressive_original.wav,3,0,0,0
+mike,55,male,original\0__relaxed2_original.wav,-2,2,-1,2
+mike,55,male,original\0__aggressive2_original.wav,2,-1,0,0
