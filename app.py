@@ -11,6 +11,7 @@ import os
 import csv
 import random
 
+
 app = Flask(__name__)
 app.secret_key = "secret_key"  # Required for session management
 
@@ -156,9 +157,9 @@ def play_song():
 
 if __name__ == "__main__":
     
-    app.run(debug=True)   
+    #app.run(debug=True)   
     
-    #app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
     
     
 
