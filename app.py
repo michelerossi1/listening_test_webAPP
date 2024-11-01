@@ -110,9 +110,6 @@ def play_song():
     current_song = audio_files[current_song_index]
     current_song_path = f"{AUDIO_FOLDER}/{current_song}"
 
-    # Get user data from session
-    user = session.get("user", {})
-
     # Calculate total songs
     total_songs = len(audio_files)
     
@@ -141,18 +138,34 @@ def play_song():
         }
 
         # Save the evaluation data to a file
-        save_evaluation(user, current_song, evaluation)
+        save_evaluation(session.get("user", {}), audio_files[current_song_index], evaluation)
+
 
         # Move to the next song
         session['current_song_index'] += 1
-        if session['current_song_index'] < len(audio_files):
+        
+        
+        # If there's a message to display, render the message page
+        if message:
+            return render_template("message.html", message=message)
+        
+        
+        
+        if session['current_song_index'] < len(audio_files):           
+                       
             return redirect(url_for('play_song'))
         else:
             # Reset for a new session or user
             session['current_song_index'] = 0
             return "Thank you for evaluating all songs!"
+        
+        
+    # Get current song if no message needs to be shown
+    current_song = audio_files[current_song_index]
+    current_song_path = f"{AUDIO_FOLDER}/{current_song}"
+    user = session.get("user", {})
 
-    return render_template("index.html", show_player=True, song_path=current_song_path, user=user, message=message)
+    return render_template("index.html", show_player=True, song_path=current_song_path, user=user)
 
 
 if __name__ == "__main__":

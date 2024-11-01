@@ -10,18 +10,18 @@
         .slider-group {
             display: flex;
             align-items: center;
-            margin-bottom: 20px; /* Space between each slider group */
+            margin-bottom: 20px;
         }
         .slider-group label {
-            width: 100px; /* Set a fixed width for labels */
+            width: 100px;
             margin-right: 10px;
         }
         .slider-group input[type="range"] {
             flex: 0.4;
         }
         .section-header {
-            margin-top: 30px; /* Space above section headers */
-            margin-bottom: 30px; /* Space below section headers */
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -41,18 +41,17 @@
             <p>If you notice that some songs sound quite similar, don’t worry; this is intentional. Please evaluate them as if you’re experiencing them for the first time.</p>
         </div>
 
-
         <h2 class="section-header">Enter Your Details</h2>
         <form method="POST" action="/">
-            <div class="form-group mb-4"> <!-- Space below the form group -->
+            <div class="form-group mb-4">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" class="form-control" required>
             </div>
-            <div class="form-group mb-4"> <!-- Space below the form group -->
+            <div class="form-group mb-4">
                 <label for="age">Age:</label>
                 <input type="number" id="age" name="age" class="form-control" required>
             </div>
-            <div class="form-group mb-4"> <!-- Space below the form group -->
+            <div class="form-group mb-4">
                 <label for="gender">Gender:</label>
                 <select id="gender" name="gender" class="form-control" required>
                     <option value="male">Male</option>
@@ -65,10 +64,6 @@
     {% else %}
         
         <h3 class="section-header">Song {{ session.current_song_index + 1 }} of {{ session.audio_files | length }}</h3>
-
-        {% if message %}
-            <div class="alert alert-info mt-4">{{ message }}</div>
-        {% endif %}
 
         <h3 class="section-header">Press Play to listen to the song:</h3>
         <audio controls>
@@ -94,11 +89,12 @@
                 <label for="sad">Sad:</label>
                 <input type="range" id="sad" name="sad" min="-3" max="3" value="0" required>
             </div>
-            <button type="submit" class="btn btn-success mt-3">Next Song</button> <!-- Space above the button -->
+            <button type="submit" class="btn btn-success mt-3">Next Song</button>
         </form>
     {% endif %}
 </body>
 </html>
+
 
 
 

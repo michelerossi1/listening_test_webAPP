@@ -1,5 +1,0 @@
-Name,Age,Gender,Song,Aggressive,Relaxed,Happy,Sad
-ff,44,male,original\0__aggressive_original.wav,3,0,0,0
-ff,44,male,original\0__sad2_original.wav,0,3,0,0
-ff,44,male,original\0__sad_original.wav,0,0,3,0
-ff,44,male,original\0__happy2_original.wav,0,0,0,3
