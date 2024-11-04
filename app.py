@@ -10,6 +10,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import csv
 import random
+from datetime import datetime 
 
 
 app = Flask(__name__)
@@ -24,7 +25,9 @@ os.makedirs(USER_EVALUATIONS_FOLDER, exist_ok=True)
 ORIGINAL_FOLDER = os.path.join(AUDIO_FOLDER, "original")
 AUGMENTED_FOLDER = os.path.join(AUDIO_FOLDER, "augmented")
 
-
+now = datetime.now()
+# Format timestamp
+TIMESTAMP = now.strftime("%d%b%Y_%I-%M").lower() + ('am' if now.hour < 12 else 'pm')
 
 def get_audio_files():
     """Retrieve and shuffle .wav files from original and augmented folders separately."""
@@ -51,7 +54,10 @@ def get_audio_files():
 def save_evaluation(user_data, song, evaluation):
     """Save a song evaluation to a unique CSV file for each user in the user_evaluations folder."""
     # Create a unique filename for each user based on their name
-    filename = f"{user_data['name']}_{user_data['age']}.csv"
+    # Get current time
+  # e.g., "04nov2024_10-19am" or "04nov2024_10-19pm"
+
+    filename = f"{user_data['name']}_{user_data['age']}_{TIMESTAMP}.csv"
     csv_path = os.path.join(USER_EVALUATIONS_FOLDER, filename)
 
     # Check if the file already exists to determine if headers are needed
@@ -115,11 +121,11 @@ def play_song():
     
     # Check for messages at 1/4, 1/2, and 3/4
     message = ""
-    if current_song_index == total_songs // 4:
+    if current_song_index == total_songs // 4 -1:
         message = "You've reached 1/4 of the songs. Take a 5-minute break to rest your ears!"
-    elif current_song_index == total_songs // 2:
+    elif current_song_index == total_songs // 2 -1:
         message = "You've reached half of the songs. Take a 5-minute break to rest your ears!"
-    elif current_song_index == (3 * total_songs) // 4:
+    elif current_song_index == (3 * total_songs) // 4 -1:
         message = "You've reached 3/4 of the songs. Take a 5-minute break to rest your ears!"
 
     if request.method == "POST":

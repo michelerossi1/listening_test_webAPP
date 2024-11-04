@@ -9,20 +9,55 @@
     <style>
         .slider-group {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             margin-bottom: 20px;
+            width: 100%; /* Ensures full width */
         }
         .slider-group label {
             width: 100px;
             margin-right: 10px;
         }
-        .slider-group input[type="range"] {
-            flex: 0.4;
+        .slider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%; /* Set fixed width for consistent alignment */
         }
+        .slider input[type="range"] {
+            width: 100%; /* Fixed width for slider */
+            margin: 0; /* Remove extra margin */
+        }
+        .slider-scale {
+            display: flex;
+            justify-content: space-between;
+            width: 112%; /* Full width for consistent number alignment */
+            font-size: 0.9em;
+            color: gray;
+            margin-top: 5px; /* Space between slider and scale */
+            margin-left: -7px; /* Shift scale to the left */
+        }
+        .slider-scale span {
+            text-align: center;
+            flex: 1; /* Equal spacing for each label */
+        }
+        /* Adjust margin for positive numbers to move them slightly to the left */
+        .slider-scale span:nth-child(5) { /* +1 */
+            margin-left: -3px;
+        }
+        
+        .slider-scale span:nth-child(6) { /* +2 */
+            margin-left: -3px;
+        }
+        
+        .slider-scale span:nth-child(7) { /* +3 */
+            margin-left: -3px;
+        }
+        /* Add space below headers */
         .section-header {
-            margin-top: 30px;
-            margin-bottom: 30px;
+            margin-bottom: 35px; /* Adjust this value for more or less space */
         }
+
     </style>
 </head>
 <body class="container mt-5">
@@ -63,9 +98,13 @@
         </form>
     {% else %}
         
-        <h3 class="section-header">Song {{ session.current_song_index + 1 }} of {{ session.audio_files | length }}</h3>
+        <h3 class="section-header" style="color: gray; font-weight: 300; font-size: 14px; margin-bottom: 5px;">Progress Bar</h3>
+        <div style="width: 100%; background-color: #f3f3f3; border-radius: 5px; height: 20px; margin-bottom: 20px;">
+            <div style="width: {{ (session.current_song_index / (session.audio_files | length) * 100) | round }}%; background-color: #4caf50; height: 100%; border-radius: 5px;"></div>
+        </div>
 
-        <h3 class="section-header">Press Play to listen to the song:</h3>
+        <h3 class="section-header">Press Play to listen song number {{ session.current_song_index + 1 }}:</h3>
+
         <audio controls>
             <source src="{{ song_path }}" type="audio/wav">
             Your browser does not support the audio element.
@@ -75,25 +114,50 @@
         <form method="POST" action="/play">
             <div class="slider-group">
                 <label for="aggressive">Aggressive:</label>
-                <input type="range" id="aggressive" name="aggressive" min="-3" max="3" value="0" required>
+                <div class="slider">
+                    <input type="range" id="aggressive" name="aggressive" min="-3" max="3" value="0" required>
+                    <div class="slider-scale">
+                        <span>-3</span><span>-2</span><span>-1</span><span>0</span><span>+1</span><span>+2</span><span>+3</span>
+                    </div>
+                </div>
             </div>
+
             <div class="slider-group">
                 <label for="relaxed">Relaxed:</label>
-                <input type="range" id="relaxed" name="relaxed" min="-3" max="3" value="0" required>
+                <div class="slider">
+                    <input type="range" id="relaxed" name="relaxed" min="-3" max="3" value="0" required>
+                    <div class="slider-scale">
+                        <span>-3</span><span>-2</span><span>-1</span><span>0</span><span>+1</span><span>+2</span><span>+3</span>
+                    </div>
+                </div>
             </div>
+
             <div class="slider-group">
                 <label for="happy">Happy:</label>
-                <input type="range" id="happy" name="happy" min="-3" max="3" value="0" required>
+                <div class="slider">
+                    <input type="range" id="happy" name="happy" min="-3" max="3" value="0" required>
+                    <div class="slider-scale">
+                        <span>-3</span><span>-2</span><span>-1</span><span>0</span><span>+1</span><span>+2</span><span>+3</span>
+                    </div>
+                </div>
             </div>
+
             <div class="slider-group">
                 <label for="sad">Sad:</label>
-                <input type="range" id="sad" name="sad" min="-3" max="3" value="0" required>
+                <div class="slider">
+                    <input type="range" id="sad" name="sad" min="-3" max="3" value="0" required>
+                    <div class="slider-scale">
+                        <span>-3</span><span>-2</span><span>-1</span><span>0</span><span>+1</span><span>+2</span><span>+3</span>
+                    </div>
+                </div>
             </div>
+
             <button type="submit" class="btn btn-success mt-3">Next Song</button>
         </form>
     {% endif %}
 </body>
 </html>
+
 
 
 
