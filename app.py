@@ -22,34 +22,26 @@ USER_EVALUATIONS_FOLDER = "user_evaluations"  # Folder to store individual user 
 # Ensure the user evaluations folder exists
 os.makedirs(USER_EVALUATIONS_FOLDER, exist_ok=True)
 
-ORIGINAL_FOLDER = os.path.join(AUDIO_FOLDER, "original")
+# thi folder contains also the orignal songs
 AUGMENTED_FOLDER = os.path.join(AUDIO_FOLDER, "augmented")
 
+# get time to save the time in the csv file
 now = datetime.now()
-# Format timestamp
 TIMESTAMP = now.strftime("%d%b%Y_%I-%M").lower() + ('am' if now.hour < 12 else 'pm')
 
-def get_audio_files():
-    """Retrieve and shuffle .wav files from original and augmented folders separately."""
-    
-    # Get all .wav files in the original folder
-    original_files = [os.path.join("original", f) for f in os.listdir(ORIGINAL_FOLDER) if f.endswith(".wav")]
-    
-    # Get all .wav files in each subfolder of the augmented folder
-    augmented_files = []
-    for subfolder in os.listdir(AUGMENTED_FOLDER):
-        subfolder_path = os.path.join(AUGMENTED_FOLDER, subfolder)
-        if os.path.isdir(subfolder_path):  # Only process directories
-            augmented_files += [os.path.join("augmented", subfolder, f) 
-                                for f in os.listdir(subfolder_path) if f.endswith(".wav")]
-    
-    # Shuffle the original and augmented lists separately
-    random.shuffle(original_files)
-    random.shuffle(augmented_files)
-    
-    # Combine the two lists with original files first
-    return original_files + augmented_files
 
+# got this audio files 
+audio_path_part1 = ['augmented\\8__sad\\sad2_low_pass.wav', 'augmented\\3__happy\\happy_time_stretch_low.wav', 'augmented\\0__original\\0__relaxed2_original_then.wav', 'augmented\\5__aggressive\\aggressive2_pitch_shift_low.wav', 'augmented\\1__aggressive\\aggressive_time_stretch_high.wav', 'augmented\\2__relaxed\\relaxed_saturation.wav', 'augmented\\1__aggressive\\aggressive_resampling.wav', 'augmented\\3__happy\\happy_resampling.wav', 'augmented\\7__happy\\happy2_compressor.wav', 'augmented\\3__happy\\happy_reverb.wav', 'augmented\\2__relaxed\\relaxed_pitch_shift_high.wav', 'augmented\\0__original\\0__aggressive2_original_then.wav', 'augmented\\5__aggressive\\aggressive2_high_pass.wav', 'augmented\\2__relaxed\\relaxed_noise_addition.wav', 'augmented\\2__relaxed\\relaxed_reverb.wav', 'augmented\\2__relaxed\\relaxed_high_pass.wav', 'augmented\\2__relaxed\\relaxed_time_stretch_low.wav', 'augmented\\1__aggressive\\aggressive_pitch_shift_low.wav', 'augmented\\5__aggressive\\aggressive2_low_pass.wav', 'augmented\\0__original\\0__sad2_original_then.wav', 'augmented\\7__happy\\happy2_pitch_shift_low.wav', 'augmented\\4__sad\\sad_saturation.wav', 'augmented\\6__relaxed\\relaxed2_noise_addition.wav', 'augmented\\5__aggressive\\aggressive2_time_stretch_low.wav', 'augmented\\8__sad\\sad2_reverb.wav', 'augmented\\5__aggressive\\aggressive2_reverb.wav', 'augmented\\4__sad\\sad_noise_addition.wav', 'augmented\\1__aggressive\\aggressive_time_stretch_low.wav', 'augmented\\4__sad\\sad_pitch_shift_low.wav', 'augmented\\4__sad\\sad_pitch_shift_high.wav', 'augmented\\3__happy\\happy_noise_addition.wav', 'augmented\\7__happy\\happy2_pitch_shift_high.wav', 'augmented\\3__happy\\happy_pitch_shift_high.wav', 'augmented\\7__happy\\happy2_high_pass.wav', 'augmented\\2__relaxed\\relaxed_pitch_shift_low.wav', 'augmented\\5__aggressive\\aggressive2_resampling.wav', 'augmented\\1__aggressive\\aggressive_pitch_shift_high.wav', 'augmented\\8__sad\\sad2_saturation.wav', 'augmented\\5__aggressive\\aggressive2_saturation.wav', 'augmented\\7__happy\\happy2_saturation.wav', 'augmented\\6__relaxed\\relaxed2_time_stretch_low.wav', 'augmented\\6__relaxed\\relaxed2_compressor.wav', 'augmented\\3__happy\\happy_low_pass.wav', 'augmented\\7__happy\\happy2_time_stretch_high.wav', 'augmented\\6__relaxed\\relaxed2_saturation.wav', 'augmented\\1__aggressive\\aggressive_saturation.wav', 'augmented\\7__happy\\happy2_time_stretch_low.wav', 'augmented\\6__relaxed\\relaxed2_time_stretch_high.wav']
+audio_path_part2 = ['augmented\\5__aggressive\\aggressive2_time_stretch_high.wav', 'augmented\\6__relaxed\\relaxed2_pitch_shift_low.wav', 'augmented\\2__relaxed\\relaxed_resampling.wav', 'augmented\\4__sad\\sad_reverb.wav', 'augmented\\4__sad\\sad_high_pass.wav', 'augmented\\4__sad\\sad_time_stretch_high.wav', 'augmented\\8__sad\\sad2_time_stretch_high.wav', 'augmented\\2__relaxed\\relaxed_compressor.wav', 'augmented\\7__happy\\happy2_noise_addition.wav', 'augmented\\8__sad\\sad2_time_stretch_low.wav', 'augmented\\0__original\\0__aggressive_origina_then.wav', 'augmented\\5__aggressive\\aggressive2_pitch_shift_high.wav', 'augmented\\2__relaxed\\relaxed_time_stretch_high.wav', 'augmented\\3__happy\\happy_saturation.wav', 'augmented\\5__aggressive\\aggressive2_compressor.wav', 'augmented\\3__happy\\happy_compressor.wav', 'augmented\\1__aggressive\\aggressive_low_pass.wav', 'augmented\\6__relaxed\\relaxed2_low_pass.wav', 'augmented\\3__happy\\happy_high_pass.wav', 'augmented\\4__sad\\sad_resampling.wav', 'augmented\\5__aggressive\\aggressive2_noise_addition.wav', 'augmented\\7__happy\\happy2_resampling.wav', 'augmented\\7__happy\\happy2_reverb.wav', 'augmented\\0__original\\0__happy2_original_then.wav', 'augmented\\6__relaxed\\relaxed2_resampling.wav', 'augmented\\4__sad\\sad_low_pass.wav', 'augmented\\2__relaxed\\relaxed_low_pass.wav', 'augmented\\1__aggressive\\aggressive_noise_addition.wav', 'augmented\\8__sad\\sad2_resampling.wav', 'augmented\\1__aggressive\\aggressive_compressor.wav', 'augmented\\6__relaxed\\relaxed2_high_pass.wav', 'augmented\\6__relaxed\\relaxed2_reverb.wav', 'augmented\\4__sad\\sad_compressor.wav', 'augmented\\8__sad\\sad2_compressor.wav', 'augmented\\0__original\\0__relaxed_original_then.wav', 'augmented\\0__original\\0__happy_original_then.wav', 'augmented\\1__aggressive\\aggressive_reverb.wav', 'augmented\\4__sad\\sad_time_stretch_low.wav', 'augmented\\8__sad\\sad2_pitch_shift_high.wav', 'augmented\\1__aggressive\\aggressive_high_pass.wav', 'augmented\\8__sad\\sad2_high_pass.wav', 'augmented\\7__happy\\happy2_low_pass.wav', 'augmented\\3__happy\\happy_pitch_shift_low.wav', 'augmented\\0__original\\0__sad_original_then.wav', 'augmented\\6__relaxed\\relaxed2_pitch_shift_high.wav', 'augmented\\3__happy\\happy_time_stretch_high.wav', 'augmented\\8__sad\\sad2_noise_addition.wav', 'augmented\\8__sad\\sad2_pitch_shift_low.wav']
+
+# fake audio paths to make tests
+#audio_path_part1 = ['augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav','augmented\\8__sad\\sad2_low_pass.wav']
+#audio_path_part2 = ['augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav','augmented\\5__aggressive\\aggressive2_time_stretch_high.wav']
+
+# define a play_song function if you want to retreve the audio paths from the folders
+#def get_songs():
+#    # go throug all the folderas and subfolders..
+#    return song_path_list
 
 def save_evaluation(user_data, song, evaluation):
     """Save a song evaluation to a unique CSV file for each user in the user_evaluations folder."""
@@ -57,7 +49,7 @@ def save_evaluation(user_data, song, evaluation):
     # Get current time
   # e.g., "04nov2024_10-19am" or "04nov2024_10-19pm"
 
-    filename = f"{user_data['name']}_{user_data['age']}_{TIMESTAMP}.csv"
+    filename = f"{user_data['name']}_{user_data['age']}_{TIMESTAMP}_{session['part_selection']}.csv"
     csv_path = os.path.join(USER_EVALUATIONS_FOLDER, filename)
 
     # Check if the file already exists to determine if headers are needed
@@ -86,17 +78,32 @@ def save_evaluation(user_data, song, evaluation):
 @app.route("/", methods=["GET", "POST"])
 def index():
     # Always refresh the audio files list on each visit to this route
-    session['audio_files'] = get_audio_files()
-    session['current_song_index'] = 0
-
     if request.method == "POST":
-        # Get form data
+        # Get form data        
         name = request.form.get("name")
         age = request.form.get("age")
         gender = request.form.get("gender")
+        part_selection = request.form.get("part_selection")
         
         # Store user details in session to retain them across requests
         session['user'] = {"name": name, "age": age, "gender": gender}
+        
+        if part_selection == "part1":
+            session['audio_files'] = audio_path_part1
+        elif part_selection == "part2":
+            session['audio_files'] = audio_path_part2
+        else:
+            session['audio_files'] = []
+            
+        # shuffle audio files
+        random.shuffle(session['audio_files'])
+            
+        # new put here the loadin gof the audio files
+        session['current_song_index'] = 0
+        
+        # save for the csv file name
+        session['part_selection'] = part_selection
+        
         
         return redirect(url_for('play_song'))
 
@@ -120,13 +127,9 @@ def play_song():
     total_songs = len(audio_files)
     
     # Check for messages at 1/4, 1/2, and 3/4
-    message = ""
-    if current_song_index == total_songs // 4 -1:
-        message = "You've reached 1/4 of the songs. Take a 5-minute break to rest your ears!"
-    elif current_song_index == total_songs // 2 -1:
+    message = ""    
+    if current_song_index == total_songs // 2 -1:
         message = "You've reached half of the songs. Take a 5-minute break to rest your ears!"
-    elif current_song_index == (3 * total_songs) // 4 -1:
-        message = "You've reached 3/4 of the songs. Take a 5-minute break to rest your ears!"
 
     if request.method == "POST":
         # Get slider values from evaluation form

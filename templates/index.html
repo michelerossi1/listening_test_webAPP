@@ -64,6 +64,30 @@
             font-style: italic; /* Italic style */
             margin-top: 20px;
         }
+        .section-header {
+            margin-top: 40px; /* Increase the top margin for more space */
+            margin-bottom: 35px; /* Adjust this value for more or less space */
+        }
+        /* Add space at the bottom of the page */
+        body {
+            padding-bottom: 30px; /* Adjust the value as needed */
+        }
+        #part_selection {
+            background-color: transparent; /* No background color */
+            color: #333; /* Dark text color */
+            border: 2px solid #007bff; /* Blue border */
+            border-radius: 8px; /* Rounded corners */
+            padding: 5px; /* Padding to make the button larger */
+            width: 100%; /* Full width */
+            font-size: 18px; /* Set a readable font size */
+        }
+        
+        #part_selection:focus {
+            outline: none; /* Remove default focus outline */
+            border-color: #0056b3; /* Darker blue border on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle shadow on focus */
+        }
+
 
     </style>
 </head>
@@ -72,30 +96,38 @@
 
     {% if not show_player %}
         <div class="intro-message">
-            <p><strong>Welcome to the listening test!</strong> You will listen to a variety of songs and assess them based on the following primary emotions:</p>
-            <ul>
-                <li>Aggressive</li>
-                <li>Relaxed</li>
-                <li>Happy</li>
-                <li>Sad</li>
-            </ul>
+            <p><strong>Welcome to the listening test!</strong> You will listen to a variety of songs and assess them based on the following primary emotions: <strong>Aggressive, Relaxed, Happy, Sad.</strong></p>
+
             <p>Please rate each song using a slider that ranges from -3 to +3. Here, <strong>+3</strong> indicates Strongly Present, <strong>0</strong> means Neutral Response, and <strong>-3</strong> signifies Strongly Opposed.</p>
             <p>If you notice that some songs sound quite similar, don’t worry; this is intentional. Please evaluate them as if you’re experiencing them for the first time.</p>
-
+            <p>Please <strong>use your headphones</strong> to conduct the test.</p>
 
         </div>
+        
 
-
-        <h2 class="section-header">Enter Your Details</h2>
-        <form method="POST" action="/">
+        <h2 class="section-header">Enter The Following Details</h2>
+        
+        <form method="POST" action="/">  
+        
+            <div class="form-group mb-4">
+                <label for="part_selection">Select Audio Part:</label>
+                <select id="part_selection" name="part_selection" class="form-control" required>
+                    <option value="part1">Part 1</option>
+                    <option value="part2">Part 2</option>
+                </select>
+            </div>      
+      
+                
             <div class="form-group mb-4">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" class="form-control" required>
             </div>
+            
             <div class="form-group mb-4">
                 <label for="age">Age:</label>
                 <input type="number" id="age" name="age" class="form-control" required>
             </div>
+            
             <div class="form-group mb-4">
                 <label for="gender">Gender:</label>
                 <select id="gender" name="gender" class="form-control" required>
@@ -104,6 +136,10 @@
                     <option value="other">Other</option>
                 </select>
             </div>
+        
+
+            
+                    
             <p class="privacy-note">By participating in this test, you agree to the collection and use of your data for research purposes. The data collected will be anonymized and will only be used to improve our understanding of the relationship between music and emotion. You have the right to withdraw from the test at any time without any consequences. If you choose to withdraw, any data collected prior to your withdrawal will still be used in an anonymized form. If you have any questions or need further clarification, please feel free to contact us at <a href="mailto:michele.rossi-2@unitn.it">michele.rossi-2@unitn.it</a>. By clicking the "Submit" button below, you confirm that you have read, understood, and agree to the terms outlined above.</p>
 
             <button type="submit" class="btn btn-primary">Submit</button>
