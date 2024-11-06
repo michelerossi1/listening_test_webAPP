@@ -15,7 +15,6 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = "secret_key"  # Required for session management
-random_modification2 = 'random_modification2'
 
 AUDIO_FOLDER = "static/music"
 USER_EVALUATIONS_FOLDER = "user_evaluations"  # Folder to store individual user evaluation files
