@@ -57,6 +57,13 @@
         .section-header {
             margin-bottom: 35px; /* Adjust this value for more or less space */
         }
+        /* Privacy note style */
+        .privacy-note {
+            font-size: 0.8em; /* Smaller font size */
+            color: gray; /* Gray color */
+            font-style: italic; /* Italic style */
+            margin-top: 20px;
+        }
 
     </style>
 </head>
@@ -74,7 +81,10 @@
             </ul>
             <p>Please rate each song using a slider that ranges from -3 to +3. Here, <strong>+3</strong> indicates Strongly Present, <strong>0</strong> means Neutral Response, and <strong>-3</strong> signifies Strongly Opposed.</p>
             <p>If you notice that some songs sound quite similar, don’t worry; this is intentional. Please evaluate them as if you’re experiencing them for the first time.</p>
+
+
         </div>
+
 
         <h2 class="section-header">Enter Your Details</h2>
         <form method="POST" action="/">
@@ -94,6 +104,8 @@
                     <option value="other">Other</option>
                 </select>
             </div>
+            <p class="privacy-note">By participating in this test, you agree to the collection and use of your data for research purposes. The data collected will be anonymized and will only be used to improve our understanding of the relationship between music and emotion. You have the right to withdraw from the test at any time without any consequences. If you choose to withdraw, any data collected prior to your withdrawal will still be used in an anonymized form. If you have any questions or need further clarification, please feel free to contact us at <a href="mailto:michele.rossi-2@unitn.it">michele.rossi-2@unitn.it</a>. By clicking the "Submit" button below, you confirm that you have read, understood, and agree to the terms outlined above.</p>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     {% else %}
