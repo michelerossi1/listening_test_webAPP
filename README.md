@@ -4,8 +4,8 @@ This project is a web application designed to conduct listening tests, where par
 
 ## Screenshot
 
-![Screenshot of the Listening Test Web Application](github repo.png)
-![Alt text describing the image](github repo.png)
+![Screenshot of the Listening Test Web Application](images/github repo.png)
+
 
 ## Features
 
