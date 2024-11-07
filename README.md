@@ -18,8 +18,6 @@ This application is a web-based listening test designed to evaluate emotional re
 
 3. **Access the test** by navigating to http://localhost:5000.
 
-**Note**: Ensure you have the necessary Python libraries installed. The required libraries are listed in requirements.txt, which you can install using:
-   ```bash
-   pip install -r requirements.txt
+
 
 
