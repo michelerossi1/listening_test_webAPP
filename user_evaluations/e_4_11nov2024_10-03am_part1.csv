@@ -1,0 +1,7 @@
+Name,Age,Gender,Song,Aggressive,Relaxed,Happy,Sad
+e,4,male,augmented\6__relaxed\relaxed2_saturation.wav,0,0,0,0
+e,4,male,augmented\5__aggressive\aggressive2_saturation.wav,0,0,0,0
+e,4,male,augmented\5__aggressive\aggressive2_reverb.wav,0,0,0,0
+e,4,male,augmented\2__relaxed\relaxed_pitch_shift_high.wav,0,0,0,0
+e,4,male,augmented\1__aggressive\aggressive_pitch_shift_high.wav,0,0,0,0
+e,4,male,augmented\3__happy\happy_low_pass.wav,0,0,0,0
