@@ -1,6 +1,7 @@
 turcus 
 - sample 22050
-(*song with spelling mistake in the csv: 0__aggressive_origina_then)
+(*song with spelling mistake in the csv: 0__aggressive_origina_then
+name corrected in the audio names and app.py, but not in csv file)
 
 loretta
 - PC Lenovo, focusrite, ATH-M50X
@@ -13,4 +14,5 @@ Parte 1: tempo non salvato
 Parte 2: ->  4:22 - 44:38(?), 4:43 - 4:52
 
 - sample 22050
-(*0__aggressive_origina_then)
+(*song with spelling mistake in the csv: 0__aggressive_origina_then
+name corrected in the audio names and app.py, but not in csv file)
