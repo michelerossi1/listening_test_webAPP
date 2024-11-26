@@ -16,3 +16,11 @@ Parte 2: ->  4:22 - 44:38(?), 4:43 - 4:52
 - sample 22050
 (*song with spelling mistake in the csv: 0__aggressive_origina_then
 name corrected in the audio names and app.py, but not in csv file)
+
+Greg
+- tolto ultima riga del part2: era rientrato una volta finito il test e aveva iniziato la prima canzone
+riga tolta: 
+Gregorio,28,male,augmented\6__relaxed\relaxed2_pitch_shift_low.wav,0,1,3,-3
+
+Nishal
+rinominato csv file tolto "_" all'inizio
